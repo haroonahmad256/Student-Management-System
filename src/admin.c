@@ -1,5 +1,8 @@
 #include <stdio.h>
 #include <string.h>
+#include <conio.h>
+#include <ctype.h>
+#include <stdlib.h>
 struct students
 {
     char student_id[20];
@@ -49,8 +52,7 @@ struct grades
     char grade[10];
 };
 
-
-void Login_admin()
+int Login_admin()
 {
 
     int choice;
@@ -67,7 +69,7 @@ void Login_admin()
 
         if (fptr == NULL)
         {
-            printf("Error opening file");
+            printf("Error opening file\n");
         }
 
         char enter_adminid[50];
@@ -95,12 +97,14 @@ void Login_admin()
             if (on)
             {
                 printf("Login successful\n");
+                return 1;
                 i = 0;
             }
 
             else
             {
                 printf("Invaid admin id or password\n");
+                return 0;
                 break;
             }
 
@@ -154,13 +158,15 @@ void Login_admin()
             {
                 remove("admin_login.txt");
                 rename("admin_login_temp.txt", "admin_login.txt");
-                printf("Your password has been changed successfully");
+                printf("Your password has been changed successfully\n");
+                return 1;
             }
 
             else
             {
                 remove("admin_login_temp.txt");
-                printf("Pssword could not changed");
+                printf("Pssword could not changed\n");
+                return 0;
             }
         }
         break;
@@ -168,10 +174,6 @@ void Login_admin()
     default:
         break;
     }
-}
-
-void Logout_admin()
-{
 }
 
 void add_student()
@@ -189,6 +191,9 @@ void add_student()
     printf("Eter Student Department: ");
     scanf("%s", student.department);
     fprintf(fptr, "%s %s %s %s\n", student.student_id, student.student_name, student.password, student.department);
+    printf("Student Data added successfully\n");
+    printf("Enter any key to continue..........\n");
+    getchar();
 }
 
 void delete_student()
@@ -239,11 +244,15 @@ void delete_student()
             remove("students.txt");
             rename("students_temp.txt", "students.txt");
             printf("You account has been deleted successfully\n");
+            printf("Enter any key to continue..........\n");
+            getchar();
         }
         else
         {
             remove("students_temp.txt");
             printf("Account couldn't be deleted\n");
+            printf("Enter any key to continue..........");
+            getchar();
         }
     }
 }
@@ -285,10 +294,14 @@ void show_student_data()
         if (inside)
         {
             printf("Rewiew data\n");
+            printf("Enter any key to continue..........\n");
+            getchar();
         }
         else
         {
             printf("Couldn't perform the operation!\n");
+            printf("Enter any key to continue..........\n");
+            getchar();
         }
 
         fclose(fptr);
@@ -312,10 +325,14 @@ void show_student_data()
         if (inside)
         {
             printf("Rewiew data\n");
+            printf("Enter any key to continue..........\n");
+            getchar();
         }
         else
         {
             printf("Couldn't perform the operation!\n");
+            printf("Enter any key to continue..........\n");
+            getchar();
         }
 
         fclose(fptr);
@@ -367,13 +384,17 @@ void change_name()
     {
         remove("students.txt");
         rename("students_temp.txt", "students.txt");
-        printf("Your Student Name has been changed successfully");
+        printf("Your Student Name has been changed successfully\n");
+        printf("Enter any key to continue..........\n");
+        getchar();
     }
 
     else
     {
         remove("students_temp.txt");
-        printf("Student Name could not changed");
+        printf("Student Name could not changed\n");
+        printf("Enter any key to continue..........\n");
+        getchar();
     }
 }
 
@@ -416,13 +437,17 @@ void change_student_ID()
     {
         remove("students.txt");
         rename("students_temp.txt", "students.txt");
-        printf("Your Student ID has been changed successfully");
+        printf("Your Student ID has been changed successfully\n");
+        printf("Enter any key to continue..........\n");
+        getchar();
     }
 
     else
     {
         remove("students_temp.txt");
-        printf("Student ID could not changed");
+        printf("Student ID could not changed\n");
+        printf("Enter any key to continue..........\n");
+        getchar();
     }
 }
 
@@ -465,13 +490,17 @@ void change_student_password()
     {
         remove("students.txt");
         rename("students_temp.txt", "students.txt");
-        printf("Your Student Account Password has been changed successfully");
+        printf("Your Student Account Password has been changed successfully\n");
+        printf("Enter any key to continue..........\n");
+        getchar();
     }
 
     else
     {
         remove("students_temp.txt");
-        printf("Student Account Password could not changed");
+        printf("Student Account Password could not changed\n");
+        printf("Enter any key to continue..........\n");
+        getchar();
     }
 }
 
@@ -514,13 +543,17 @@ void change_student_Department()
     {
         remove("students.txt");
         rename("students_temp.txt", "students.txt");
-        printf("Your Student Department has been changed successfully");
+        printf("Your Student Department has been changed successfully\n");
+        printf("Enter any key to continue..........");
+        getchar();
     }
 
     else
     {
         remove("students_temp.txt");
-        printf("Student Department could not changed");
+        printf("Student Department could not changed\n");
+        printf("Enter any key to continue..........\n");
+        getchar();
     }
 }
 
@@ -742,13 +775,13 @@ void update_courses()
     {
         remove("courses.txt");
         rename("courses_temp.txt", "courses.txt");
-        printf("Your Course ID has been changed successfully");
+        printf("Your Course ID has been changed successfully\n");
     }
 
     else
     {
         remove("courses_temp.txt");
-        printf("Course ID could not changed");
+        printf("Course ID could not changed\n");
     }
 }
 
@@ -763,6 +796,7 @@ void new_enrollments()
     printf("Enter Course ID: ");
     scanf("%s", enroll.course_ID);
     fprintf(fptr, "%s %s\n", enroll.student_ID, enroll.student_ID);
+    printf("New Enrollment Added Successfully\n");
 }
 
 void view_enrollments()
@@ -1000,7 +1034,7 @@ void remove_Assignment()
             }
             else
             {
-                fprintf(fptr2, "%s %s %s %s", assignment.Assignment_id, assignment.Course_id, assignment.Assignment_name, assignment.deadline);
+                fprintf(fptr2, "%s %s %s %s\n", assignment.Assignment_id, assignment.Course_id, assignment.Assignment_name, assignment.deadline);
             }
         }
 
@@ -1078,11 +1112,11 @@ void view_submissions()
 
     if (should_g0)
     {
-        printf("%d Students have submitted the assignment", sum);
+        printf("%d Students have submitted the assignment\n", sum);
     }
     else
     {
-        printf("Assignment Id doesn't exist");
+        printf("Assignment Id doesn't exist\n");
     }
 
     fclose(fptr);
@@ -1156,7 +1190,7 @@ void Add_grades()
     fprintf(fptr, "%s %.2f %s\n", g.student_id, g.gradepoint, g.grade);
     fclose(fptr);
     printf("Grades have been Added\n");
-    printf("Press any key to continue...");
+    printf("Press any key to continue......\n");
     getchar();
 }
 
@@ -1176,7 +1210,7 @@ void Delete_grade()
     {
         printf("Enter Student ID: ");
         scanf("%s", Student_ID);
-        
+
         struct grades g;
         while (fscanf(fptr, "%s %f %s", g.student_id, &g.gradepoint, g.grade) == 3)
         {
@@ -1288,35 +1322,43 @@ void view_grades()
     }
 }
 
-
 void adminmainMenu()
 {
-    printf("1. Manage Students");
-    printf("2. Manage Courses");
-    printf("3. Manage Assignment");
-    printf("4. Manage Grades");
-    printf("5. Logout");
+
+    printf("\n******Welcome As Admin******\n");
+    printf("Student Management System\n");
+    printf("1. Manage Students\n");
+    printf("2. Manage Courses\n");
+    printf("3. Manage Assignment\n");
+    printf("4. Manage Grades\n");
+    printf("5. Manage Enrollments\n");
+    printf("6 Logout\n");
 }
 
-void studentmenu(){
+void ManageSudents()
+{
+    system("cls");
     int choice;
-    printf("1. Add Students");
-    printf("2. Delete Students");
-    printf("3. Edit Student Information");
-    printf("4. Veiw Student Record");
-    printf("5. Back");
+    printf("Student Managing Section\n");
+    printf("1. Add Students\n");
+    printf("2. Delete Students\n");
+    printf("3. Edit Student Information\n");
+    printf("4. Veiw Student Record\n");
+    printf("5. Back\n");
     printf("Ente your choice: ");
+    scanf("%d", &choice);
     switch (choice)
     {
     case 1:
         add_student();
         break;
-    
+
     case 2:
         delete_student();
         break;
 
     case 3:
+        system("cls");
         Update_student();
         break;
 
@@ -1324,39 +1366,50 @@ void studentmenu(){
         show_student_data();
         break;
 
-    case 5: 
+    case 5:
         break;
     default:
         break;
     }
 }
 
-void Courses_Menu(){
+void Courses_Menu()
+{
+    system("cls");
     int choice;
-    printf("1. Add Courses");
-    printf("2. Delete Courses");
-    printf("3. Edit COurse ID");
-    printf("4. View Courses");
-    printf("5. Back");
+    printf("COuse Management Section\n");
+    printf("1. Add Courses\n");
+    printf("2. Delete Courses\n");
+    printf("3. Edit COurse ID\n");
+    printf("4. View Courses\n");
+    printf("5. Back\n");
     printf("Enter your choice: ");
     scanf("%d", &choice);
     switch (choice)
     {
     case 1:
         add_course();
+        printf("\nEnter any key to continue..........");
+        getchar();
         break;
     case 2:
         delete_course();
+        printf("\nEnter any key to continue..........");
+        getchar();
         break;
 
     case 3:
         update_courses();
+        printf("\nEnter any key to continue..........");
+        getchar();
         break;
-    
+
     case 4:
         view_courses();
+        printf("\nEnter any key to continue..........");
+        getchar();
         break;
-    
+
     case 5:
         break;
     default:
@@ -1364,33 +1417,43 @@ void Courses_Menu(){
     }
 }
 
-void Assignment_Menu(){
-
+void Assignment_Menu()
+{
+    system("cls");
     int choice;
-    printf("1. Add Assignment");
-    printf("2. Delete Assignment");
-    printf("3. View Assignment");
-    printf("4. View Submissions");
-    printf("5. Back");
+    printf("Assignment Management Section\n");
+    printf("1. Add Assignment\n");
+    printf("2. Delete Assignment\n");
+    printf("3. View Assignment\n");
+    printf("4. View Submissions\n");
+    printf("5. Back\n");
     printf("Enter your choice: ");
     scanf("%d", &choice);
     switch (choice)
     {
     case 1:
         add_assignment();
+        printf("\nEnter any key to continue..........");
+        getchar();
         break;
     case 2:
         remove_Assignment();
+        printf("\nEnter any key to continue..........");
+        getchar();
         break;
 
     case 3:
         view_assignment();
+        printf("\nEnter any key to continue..........");
+        getchar();
         break;
-    
+
     case 4:
         view_submissions();
+        printf("\nEnter any key to continue..........");
+        getchar();
         break;
-    
+
     case 5:
         break;
     default:
@@ -1398,29 +1461,39 @@ void Assignment_Menu(){
     }
 }
 
-void Manage_Grades(){
-
+void Manage_Grades()
+{
+    system("cls");
     int choice;
-    printf("1. Add Student Grade");
-    printf("2. Delete Student Grade");
-    printf("3. View Grades");
-    printf("4. Back");
+    printf("Grades Management Section\n");
+    printf("1. Add Student Grade\n");
+    printf("2. Delete Student Grade\n");
+    printf("3. View Grades\n");
+    printf("4. Back\n");
     printf("Enter your choice: ");
     scanf("%d", &choice);
     switch (choice)
     {
     case 1:
         Add_grades();
+        printf("\nEnter any key to continue..........");
+        getchar();
         break;
     case 2:
         Delete_grade();
+        printf("\nEnter any key to continue..........");
+        getchar();
         break;
 
     case 3:
         view_grades();
+        printf("\nEnter any key to continue..........");
+        getchar();
         break;
-    
+
     case 4:
+        printf("\nEnter any key to continue..........");
+        getchar();
         break;
 
     default:
@@ -1428,28 +1501,36 @@ void Manage_Grades(){
     }
 }
 
-void Manage_Enrollments(){
-
+void Manage_Enrollments()
+{
+    system("cls");
     int choice;
-    printf("1. Add Student Enrollement");
-    printf("2. Remove Enrollement");
-    printf("3. View Enrollement");
-    printf("4. Back");
+    printf("Student Enrollment Section\n");
+    printf("1. Add Student Enrollement\n");
+    printf("2. Remove Enrollement\n");
+    printf("3. View Enrollement\n");
+    printf("4. Back\n");
     printf("Enter your choice: ");
     scanf("%d", &choice);
     switch (choice)
     {
     case 1:
         new_enrollments();
+        printf("\nEnter any key to continue..........");
+        getchar();
         break;
     case 2:
         remove_enrollments();
+        printf("\nEnter any key to continue..........");
+        getchar();
         break;
 
     case 3:
         view_enrollments();
+        printf("\nEnter any key to continue..........");
+        getchar();
         break;
-    
+
     case 4:
         break;
 
