@@ -762,3 +762,150 @@ void update_courses()
 
 }
 
+void new_enrollments(){
+
+    FILE *fptr;
+    fptr = fopen("enrollments.txt", "a");
+    struct enrollments enroll;
+    printf("Enter Student ID: ");
+    scanf("%s", enroll.student_ID);
+    printf("Enter Course ID: ");
+    scanf("%s", enroll.course_ID);
+    fprintf(fptr, "%s %s\n", enroll.student_ID, enroll.student_ID);
+
+}
+
+void view_enrollments(){
+    
+    FILE *fptr;
+    fptr = fopen("enrollments.txt", "r");
+    char enter_courseid[10];
+    struct enrollments enroll;
+    int choice;
+    printf("Perform any action\n");
+    printf("1. View enrollments of a particular course\n");
+    printf("2. View all enrollments\n");
+    printf("3. Exit\n");
+    printf("What do you want: ");
+    scanf("%d", &choice);
+
+    int inside = 0;
+    switch (choice)
+    {
+    case 1:
+
+        int j=0;
+        printf("Enter Course ID: ");
+        scanf("%s", enter_courseid);
+
+        while (fscanf(fptr, "%s %s", enroll.student_ID, enroll.student_ID) == 2)
+        {
+            if (strcmp(enter_courseid, enroll.course_ID) == 0)
+            {
+                printf("Course No: %d\n", j+1);
+                printf("Course ID: %s | Course Name: %s", enroll.course_ID, enroll.student_ID);
+                printf("\n");
+                inside = 1;
+                j++;
+            }
+        }
+
+        if (inside)
+        {
+            printf("Rewiew data\n");
+        }
+        else
+        {
+            printf("Couldn't perform the operation!\n");
+        }
+
+        fclose(fptr);
+        break;
+
+    case 2:
+        int i = 0;
+
+        while (fscanf(fptr, "%s %s", enroll.student_ID, enroll.student_ID) == 2)
+        {
+            printf("Course no: %d\n", i+1);
+            printf("Course ID: %s | Course Name: %s", enroll.course_ID, enroll.student_ID);
+            printf("-----------------------\n");
+            inside = 1;
+            i++;
+        }
+
+        if (inside)
+        {
+            printf("Rewiew data\n");
+        }
+        else
+        {
+            printf("Couldn't perform the operation!\n");
+        }
+
+        fclose(fptr);
+
+        break;
+
+    case 3:
+        break;
+    default:
+        break;
+    }
+
+
+}
+
+void remove_enrollments(){
+
+    FILE *fptr;
+    FILE *fptr2;
+    fptr = fopen("enrollments.txt", "r");
+    fptr2 = fopen("enrollments_temp.txt", "a");
+    
+    char del_enrollement[10];
+    char enter_student_ID[10];
+    printf("Do you want to delete an enrollment(y/n): ");
+    scanf("%s", del_enrollement);
+    int inside = 0;
+    
+    if (del_enrollement[0] == 'y' || del_enrollement[0] == 'Y')
+    {
+        printf("Enter Student ID: ");
+        scanf("%s", enter_student_ID);
+        
+        struct enrollments enroll;
+        while (fscanf(fptr, "%s %s", enroll.student_ID, enroll.student_ID) == 3)
+        {
+            if (strcmp(enter_student_ID, enroll.student_ID) == 0)
+            {
+                inside = 1;
+                continue;
+            }
+
+            else
+            {
+
+                fprintf(fptr2, "%s %s", enroll.student_ID, enroll.student_ID);
+            }
+        }
+
+        fclose(fptr2);
+        fclose(fptr);
+
+        if (inside)
+        {
+            remove("courses.txt");
+            rename("enrollments_temp.txt", "enrollments.txt");
+            printf("Course has been deleted successfully\n");
+        }
+        else
+        {
+            remove("enrollments_temp.txt");
+            printf("Course couldn't be deleted\n");
+        }
+    }
+
+
+}
+
