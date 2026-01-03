@@ -228,3 +228,85 @@ void delete_student()
     }
 }
 
+void show_student_data()
+{
+    FILE *fptr;
+    fptr = fopen("students.txt", "r");
+    char enter_studentid[10];
+    struct students student;
+    int choice;
+    printf("Perform any action\n");
+    printf("1. Show data of a particular Student\n");
+    printf("2. SHow all students data\n");
+    printf("3. Exit\n");
+    printf("What do you want: ");
+    scanf("%d", &choice);
+
+    int inside = 0;
+    switch (choice)
+    {
+    case 1:
+
+
+        printf("Enter Student ID of student: ");
+        scanf("%s", enter_studentid);
+
+        while (fscanf(fptr, "%s %s %s %s", student.student_id, student.student_name, student.password, student.department) == 4)
+        {
+            if (strcmp(enter_studentid, student.student_id) == 0)
+            {
+                printf("Student ID: %s\n", student.student_id);
+                printf("Student Name: %s %s\n", student.student_name);
+                printf("Department: %s\n", student.department);
+                printf("Password: %s\n", student.password);
+                inside = 1;
+            }
+        }
+
+        if (inside)
+        {
+            printf("Rewiew data\n");
+        }
+        else
+        {
+            printf("Couldn't perform the operation!\n");
+        }
+
+        fclose(fptr);
+        break;
+
+    case 2:
+        int i = 0;
+
+        while (fscanf(fptr, "%s %s %s %s", student.student_id, student.student_name, student.password, student.department) == 4)
+        {
+            printf("Student%d data: \n", i+1);
+            printf("Student ID: %s\n", student.student_id);
+            printf("Student Name: %s %s\n", student.student_name);
+            printf("Department: %s\n", student.department);
+            printf("Password: %s\n", student.password);
+            printf("\n");
+            inside = 1;
+            i++;
+        }
+
+        if (inside)
+        {
+            printf("Rewiew data\n");
+        }
+        else
+        {
+            printf("Couldn't perform the operation!\n");
+        }
+
+        fclose(fptr);
+
+        break;
+
+    case 3:
+        break;
+    default:
+        break;
+    }
+}
+
