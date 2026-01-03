@@ -20,6 +20,7 @@ struct admins
 
 
 
+
 void adminMenu()
 {
     printf("1. Manage Students");
@@ -304,6 +305,239 @@ void show_student_data()
         break;
 
     case 3:
+        break;
+    default:
+        break;
+    }
+}
+
+void change_name()
+{
+    FILE *fptr;
+    FILE *fptr2;
+    fptr = fopen("students.txt", "r");
+    fptr2 = fopen("students_temp.txt", "a");
+    char forgotpassword;
+    char student_id[10], new_name[50];
+    struct students student;
+
+    printf("Enter Student ID to change name: ");
+    scanf("%s", student_id);
+
+    int inside= 0;
+    while (fscanf(fptr, "%s %s %s %s", student.student_id, student.student_name, student.password, student.department) == 4)
+    {
+        if (strcmp(student_id, student.student_id) == 0)
+        {
+            printf("Enter new name: ");
+            scanf("%s", new_name);
+            fprintf(fptr2,  "%s %s %s %s\n", student.student_id, new_name, student.password, student.department);
+            inside = 1;
+        }
+
+        else
+        {
+
+            fprintf(fptr2,  "%s %s %s %s\n", student.student_id, student.student_name, student.password, student.department);
+        }
+    }
+
+    fclose(fptr2);
+    fclose(fptr);
+
+    if (inside)
+    {
+        remove("students.txt");
+        rename("students_temp.txt", "students.txt");
+        printf("Your Student Name has been changed successfully");
+    }
+
+    else
+    {
+        remove("students_temp.txt");
+        printf("Student Name could not changed");
+    }
+}
+
+void change_student_ID(){
+
+    FILE *fptr;
+    FILE *fptr2;
+    fptr = fopen("students.txt", "r");
+    fptr2 = fopen("students_temp.txt", "a");
+    char forgotpassword;
+    char student_id[10], new_ID[20];
+    struct students student;
+
+    printf("Enter Student ID to change ID: ");
+    scanf("%s", student_id);
+
+    int inside= 0;
+    while (fscanf(fptr, "%s %s %s %s", student.student_id, student.student_name, student.password, student.department) == 4)
+    {
+        if (strcmp(student_id, student.student_id) == 0)
+        {
+            printf("Enter new ID: ");
+            scanf("%s", new_ID);
+            fprintf(fptr2,  "%s %s %s %s\n", new_ID, student.student_name, student.password, student.department);
+            inside = 1;
+        }
+
+        else
+        {
+
+            fprintf(fptr2,  "%s %s %s %s\n", student.student_id, student.student_name, student.password, student.department);
+        }
+    }
+
+    fclose(fptr2);
+    fclose(fptr);
+
+    if (inside)
+    {
+        remove("students.txt");
+        rename("students_temp.txt", "students.txt");
+        printf("Your Student ID has been changed successfully");
+    }
+
+    else
+    {
+        remove("students_temp.txt");
+        printf("Student ID could not changed");
+    }
+
+}
+
+void change_student_password(){
+
+    FILE *fptr;
+    FILE *fptr2;
+    fptr = fopen("students.txt", "r");
+    fptr2 = fopen("students_temp.txt", "a");
+    char forgotpassword;
+    char student_id[10], new_Password[20];
+    struct students student;
+
+    printf("Enter Student ID to change Password: ");
+    scanf("%s", student_id);
+
+    int inside= 0;
+    while (fscanf(fptr, "%s %s %s %s", student.student_id, student.student_name, student.password, student.department) == 4)
+    {
+        if (strcmp(student_id, student.student_id) == 0)
+        {
+            printf("Enter new ID: ");
+            scanf("%s", new_Password);
+            fprintf(fptr2,  "%s %s %s %s\n", student.student_id, student.student_name, new_Password, student.department);
+            inside = 1;
+        }
+
+        else
+        {
+
+            fprintf(fptr2,  "%s %s %s %s\n", student.student_id, student.student_name, student.password, student.department);
+        }
+    }
+
+    fclose(fptr2);
+    fclose(fptr);
+
+    if (inside)
+    {
+        remove("students.txt");
+        rename("students_temp.txt", "students.txt");
+        printf("Your Student Account Password has been changed successfully");
+    }
+
+    else
+    {
+        remove("students_temp.txt");
+        printf("Student Account Password could not changed");
+    }
+
+}
+
+void change_student_Department(){
+
+    FILE *fptr;
+    FILE *fptr2;
+    fptr = fopen("students.txt", "r");
+    fptr2 = fopen("students_temp.txt", "a");
+    char forgotpassword;
+    char student_id[10], new_Department[20];
+    struct students student;
+
+    printf("Enter Student ID to change Department: ");
+    scanf("%s", student_id);
+
+    int inside= 0;
+    while (fscanf(fptr, "%s %s %s %s", student.student_id, student.student_name, student.password, student.department) == 4)
+    {
+        if (strcmp(student_id, student.student_id) == 0)
+        {
+            printf("Enter new ID: ");
+            scanf("%s", new_Department);
+            fprintf(fptr2,  "%s %s %s %s\n", student.student_id, student.student_name, student.password, new_Department);
+            inside = 1;
+        }
+
+        else
+        {
+
+            fprintf(fptr2,  "%s %s %s %s\n", student.student_id, student.student_name, student.password, student.department);
+        }
+    }
+
+    fclose(fptr2);
+    fclose(fptr);
+
+    if (inside)
+    {
+        remove("students.txt");
+        rename("students_temp.txt", "students.txt");
+        printf("Your Student Department has been changed successfully");
+    }
+
+    else
+    {
+        remove("students_temp.txt");
+        printf("Student Department could not changed");
+    }
+
+}
+
+
+void Update_student()
+{
+    int choice;
+    printf("Edit Student Details\n");
+    printf("1. Change ID\n");
+    printf("2. Change Name\n");
+    printf("3. Change Password\n");
+    printf("4. Change Department\n");
+    printf("5. Exit\n");
+    printf("Enter your choice: ");
+    scanf("%d", &choice);
+    switch (choice)
+    {
+    case 1:
+        change_student_ID();
+        break;
+
+    case 2:
+        change_name();
+        break;
+
+    case 3:
+        change_student_password();
+        break;
+
+    case 4:
+        change_student_Department();
+        break;
+
+    case 5:
+
         break;
     default:
         break;
