@@ -119,7 +119,7 @@ void Login_admin()
         break;
 
     case 2:
-        {
+    {
         FILE *fptr3;
         FILE *fptr2;
         fptr3 = fopen("admin_login.txt", "r");
@@ -172,8 +172,7 @@ void Login_admin()
             }
         }
         break;
-
-        }
+    }
     default:
         break;
     }
@@ -199,7 +198,6 @@ void add_student()
     scanf("%s", student.department);
     fprintf(fptr, "%s %s %s %s\n", student.student_id, student.student_name, student.password, student.department);
 }
-
 
 void delete_student()
 {
@@ -907,36 +905,39 @@ void remove_enrollments()
     }
 }
 
-void add_assignment() {
+void add_assignment()
+{
     FILE *fptr = fopen("assignments.txt", "a");
     FILE *fptr2 = fopen("courses.txt", "r");
 
-    if (fptr == NULL || fptr2 == NULL) 
+    if (fptr == NULL || fptr2 == NULL)
     {
         printf("Error opening files!\n");
-        if(fptr) fclose(fptr);
-        if(fptr2) fclose(fptr2);
+        if (fptr)
+            fclose(fptr);
+        if (fptr2)
+            fclose(fptr2);
         return;
     }
 
     struct assignments assignment;
     struct courses course;
-    
+
     printf("Enter Course ID: ");
-    scanf("%s", assignment.Course_id); 
+    scanf("%s", assignment.Course_id);
 
     int course_found = 0;
-    while (fscanf(fptr2, "%s %s %d", course.course_id, course.course_name, &course.creadit_hours) == 3) 
+    while (fscanf(fptr2, "%s %s %d", course.course_id, course.course_name, &course.creadit_hours) == 3)
     {
-        if (strcmp(assignment.Course_id, course.course_id) == 0) 
+        if (strcmp(assignment.Course_id, course.course_id) == 0)
         {
             course_found = 1;
-            break; 
+            break;
         }
     }
     fclose(fptr2);
 
-    if (course_found) 
+    if (course_found)
     {
         int id_is_unique = 1;
         struct assignments a;
@@ -944,10 +945,11 @@ void add_assignment() {
         scanf("%s", assignment.Assignment_id);
 
         FILE *fptr3 = fopen("assignments.txt", "r");
-        if (fptr3 != NULL) {
-            while (fscanf(fptr3, "%s %s %s %s", a.Assignment_id, a.Course_id, a.Assignment_name, a.deadline) == 4) 
+        if (fptr3 != NULL)
+        {
+            while (fscanf(fptr3, "%s %s %s %s", a.Assignment_id, a.Course_id, a.Assignment_name, a.deadline) == 4)
             {
-                if (strcmp(assignment.Assignment_id, a.Assignment_id) == 0) 
+                if (strcmp(assignment.Assignment_id, a.Assignment_id) == 0)
                 {
                     id_is_unique = 0;
                     break;
@@ -956,22 +958,22 @@ void add_assignment() {
             fclose(fptr3);
         }
 
-        if (id_is_unique) 
+        if (id_is_unique)
         {
             printf("Enter Assignment Name: ");
             scanf("%s", assignment.Assignment_name);
             printf("Enter Deadline: ");
             scanf("%s", assignment.deadline);
-            
+
             fprintf(fptr, "%s %s %s %s\n", assignment.Assignment_id, assignment.Course_id, assignment.Assignment_name, assignment.deadline);
             printf("Assignment added successfully!\n");
-        } 
-        else 
+        }
+        else
         {
             printf("Assignment ID already exists.\n");
         }
     }
-    else 
+    else
     {
         printf("Error: Course ID doesn't exist.\n");
     }
@@ -1031,7 +1033,7 @@ void view_assignment()
 {
     FILE *fptr;
     fptr = fopen("assignments.txt", "r");
-    
+
     char enter_assignmentid[10];
     struct assignments assignment;
 
@@ -1067,9 +1069,9 @@ void view_submissions()
     printf("Enter Assignment id to check submissions: ");
     scanf("%s", sid);
 
-    while (fscanf(fptr, "%s %s %s",submit.assignment_id, submit.student_id,  submit.date_submission) == 3)
+    while (fscanf(fptr, "%s %s %s", submit.assignment_id, submit.student_id, submit.date_submission) == 3)
     {
-        if (strcmp(sid, submit.assignment_id)==0)
+        if (strcmp(sid, submit.assignment_id) == 0)
         {
             printf("Student no: %d\n", i + 1);
             printf("Strudent ID: %s\n", submit.assignment_id);
@@ -1110,59 +1112,56 @@ void Add_grades()
     for (int i = 0; i < n; i++)
     {
         printf("Enter marks in subject %d: ", i + 1);
-        scanf("%d", &marks);
+        scanf("%f", &marks);
         total += marks;
     }
 
-    float percentage = (total / (n*100.0)) * 100.0;
+    float percentage = (total / (n * 100.0)) * 100.0;
     float gradepoint;
     char grade[10];
 
-    if (percentage > 84.0)
+    if (percentage >= 85.0)
     {
-        gradepoint = 4.0;
-        grade[0] = 'A+';
+        g.gradepoint = 4.0;
+        strcpy(g.grade, "A+");
     }
-
-    else if (percentage > 79.0)
+    else if (percentage >= 80.0)
     {
-        gradepoint = 3.7;
-        grade[0] = 'A';
+        g.gradepoint = 3.7;
+        strcpy(g.grade, "A");
     }
-    
-    else if (percentage > 74.0)
+    else if (percentage >= 75.0)
     {
-        gradepoint = 3.4;
-        grade[0] = 'B+';
+        g.gradepoint = 3.4;
+        strcpy(g.grade, "B+");
     }
-    else if (percentage > 69.0)
+    else if (percentage >= 70.0)
     {
-        gradepoint = 3.0;
-        grade[0] = 'B';
+        g.gradepoint = 3.0;
+        strcpy(g.grade, "B");
     }
-    else if (percentage > 64.0)
+    else if (percentage >= 65.0)
     {
-        gradepoint = 2.5;
-        grade[0] = 'C';
+        g.gradepoint = 2.5;
+        strcpy(g.grade, "C");
     }
-    else if (percentage > 59.0)
+    else if (percentage >= 60.0)
     {
-        gradepoint = 2.0;
-        grade[0] = 'D';
+        g.gradepoint = 2.0;
+        strcpy(g.grade, "D");
     }
-    else if (percentage > 54,0)
+    else if (percentage >= 55.0)
     {
-        gradepoint = 1.0;
-        grade[0] = 'E';
+        g.gradepoint = 1.0;
+        strcpy(g.grade, "E");
     }
-
     else
     {
-        gradepoint = 0.0;
-        grade[0] = 'F';
+        g.gradepoint = 0.0;
+        strcpy(g.grade, "F");
     }
 
-    fprintf(fptr, "%s %.2f %s\n", g.student_id, gradepoint, grade);
+    fprintf(fptr, "%s %.2f %s\n", g.student_id, g.gradepoint, g.grade);
     fclose(fptr);
     printf("Grades have been Added\n");
     printf("Press any key to continue...");
@@ -1171,7 +1170,6 @@ void Add_grades()
 
 void Delete_grade()
 {
-
     FILE *fptr;
     FILE *fptr2;
     fptr = fopen("grades.txt", "r");
@@ -1186,9 +1184,9 @@ void Delete_grade()
     {
         printf("Enter Student ID: ");
         scanf("%s", Student_ID);
+        
         struct grades g;
-
-        while (fscanf(fptr, "%s %f %s", g.student_id, g.gradepoint, g.grade) == 3)
+        while (fscanf(fptr, "%s %f %s", g.student_id, &g.gradepoint, g.grade) == 3)
         {
             if (strcmp(Student_ID, g.student_id) == 0)
             {
@@ -1198,7 +1196,7 @@ void Delete_grade()
             else
             {
 
-                fprintf(fptr2, "%s %f %s", g.student_id, g.gradepoint, g.grade);
+                fprintf(fptr2, "%s %.2f %s\n", g.student_id, g.gradepoint, g.grade);
             }
         }
 
@@ -1209,12 +1207,12 @@ void Delete_grade()
         {
             remove("grades.txt");
             rename("grades_temp.txt", "grades.txt");
-            printf("grades of student has been deleted successfully\n");
+            printf("Grades of student has been deleted successfully\n");
         }
         else
         {
             remove("grades_temp.txt");
-            printf("grades of student couldn't be deleted\n");
+            printf("Grades of student couldn't be deleted\n");
         }
     }
 }
@@ -1242,13 +1240,13 @@ void view_grades()
         printf("Enter Student ID: ");
         scanf("%s", enter_studentid);
 
-        while (fscanf(fptr, "%s %f %c", g.student_id, g.gradepoint, &g.grade) == 3)
+        while (fscanf(fptr, "%s %f %s", g.student_id, &g.gradepoint, g.grade) == 3)
         {
             if (strcmp(enter_studentid, g.student_id) == 0)
             {
                 printf("Student ID: %s\n", g.student_id);
-                printf("Student GPA: %f\n", g.gradepoint);
-                printf("Student Grade: %c\n", g.grade);
+                printf("Student GPA: %.2f\n", g.gradepoint);
+                printf("Student Grade: %2s\n", g.grade);
                 inside = 1;
             }
         }
@@ -1268,12 +1266,12 @@ void view_grades()
     case 2:
         int i = 0;
 
-        while (fscanf(fptr, "%s %f %c", g.student_id, g.gradepoint, &g.grade) == 3)
+        while (fscanf(fptr, "%s %f %s", g.student_id, &g.gradepoint, g.grade) == 3)
         {
             printf("Student no: %d\n", i + 1);
             printf("Student ID: %s\n", g.student_id);
-            printf("GPA: %f\n", g.gradepoint);
-            printf("Grade: %c\n", g.grade);
+            printf("GPA: %.2f\n", g.gradepoint);
+            printf("Grade: %2s\n", g.grade);
             printf("-----------------------\n");
             inside = 1;
             i++;
@@ -1289,7 +1287,6 @@ void view_grades()
         }
 
         fclose(fptr);
-
         break;
 
     case 3:
@@ -1298,3 +1295,4 @@ void view_grades()
         break;
     }
 }
+
