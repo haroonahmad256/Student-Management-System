@@ -149,3 +149,82 @@ void Login_admin()
 }
 
 
+void Logout_admin()
+{
+}
+
+void add_student()
+{
+
+    FILE *fptr;
+    fptr = fopen("students.txt", "a");
+    struct students student;
+    printf("Enter Student Student ID: ");
+    scanf("%s", student.student_id);
+    printf("Enter Student Name: ");
+    scanf("%s", student.student_name);
+    printf("Enter Student Password: ");
+    scanf("%s", student.password);
+    printf("Eter Student Department: ");
+    scanf("%s", student.department);
+    fprintf(fptr, "%s %s %s %s\n", student.student_id, student.student_name, student.password, student.department);
+}
+
+void delete_student()
+{
+
+    FILE *fptr;
+    FILE *fptr2;
+    fptr = fopen("students.txt", "r");
+    fptr2 = fopen("students_temp.txt", "a");
+
+    if (fptr2== NULL)
+    {
+        printf("Error opening file");
+    }
+    
+    
+    char del_account[10];
+    char enter_studentid[10];
+    struct students student;
+    printf("Do you want to delete a student account(y/n): ");
+    scanf("%s", del_account);
+    int inside = 0;
+
+    if (del_account[0] == 'y' || del_account[0] == 'Y')
+    {
+        printf("Enter Student ID: ");
+        scanf("%s", enter_studentid);
+
+        while (fscanf(fptr, "%s %s %s %s", student.student_id, student.student_name, student.password, student.department) == 4)
+        {
+            if (strcmp(enter_studentid, student.student_id) == 0)
+            {
+                inside = 1;
+                continue;
+            }
+
+            else
+            {
+
+                fprintf(fptr2, "%s %s %s %s\n", student.student_id, student.student_name, student.password, student.department);
+            }
+        }
+
+        fclose(fptr2);
+        fclose(fptr);
+
+        if (inside)
+        {
+            remove("students.txt");
+            rename("students_temp.txt", "students.txt");
+            printf("You account has been deleted successfully\n");
+        }
+        else
+        {
+            remove("students_temp.txt");
+            printf("Account couldn't be deleted\n");
+        }
+    }
+}
+
