@@ -31,6 +31,14 @@ struct enrollments
     char course_ID[10];
 };
 
+struct assignments
+{
+    char Course_id[10];
+    char Assignment_id[10];
+    char Assignment_name[50];
+    char deadline[20];
+};
+
 
 
 void adminMenu()
@@ -901,12 +909,31 @@ void remove_enrollments(){
 
 }
 
+void add_assignment(){
+
+    FILE *fptr;
+    fptr = fopen("assignments.txt", "a");
+    struct assignments assignment;
+    printf("Enter Course ID: ");
+    scanf("%s", assignment.Course_id);
+    printf("Enter Assignment ID: ");
+    scanf("%s", assignment.Assignment_id);
+    printf("Enter Assignment Name: ");
+    scanf("%s", assignment.Assignment_name);
+    printf("Enter Deadline of assignment: ");
+    scanf("%s", assignment.deadline);
+    fprintf(fptr, "%s %s %s %s\n", assignment.Course_id, assignment.Assignment_id, assignment.Assignment_name, assignment.deadline);
+    
+}
+
 void Manage_Assignment()
 {
+
 
 }
 
 void Manage_Grades()
 {
+
 }
 
