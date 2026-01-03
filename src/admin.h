@@ -2,7 +2,7 @@
 #define ADMIN_H
 //Here you will only define function prototype like this only and other body of function in .c file
 
-void adminMenu();
+void adminmainMenu();
 void Login_admin();
 void Logout_admin();
 void add_student();
@@ -26,5 +26,10 @@ void view_submissions();
 void Add_grades();
 void Delete_grade();
 void view_grades();
+void studentmenu();
+void Courses_Menu();
+void Assignment_Menu();
+void Manage_Grades();
+void Manage_Enrollments();
 
 #endif

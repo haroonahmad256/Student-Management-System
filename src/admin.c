@@ -49,14 +49,6 @@ struct grades
     char grade[10];
 };
 
-void adminMenu()
-{
-    printf("1. Manage Students");
-    printf("2. Manage Courses");
-    printf("3. Manage Assignment");
-    printf("4. Manage Grades");
-    printf("5. Logout");
-}
 
 void Login_admin()
 {
@@ -1291,6 +1283,176 @@ void view_grades()
 
     case 3:
         break;
+    default:
+        break;
+    }
+}
+
+
+void adminmainMenu()
+{
+    printf("1. Manage Students");
+    printf("2. Manage Courses");
+    printf("3. Manage Assignment");
+    printf("4. Manage Grades");
+    printf("5. Logout");
+}
+
+void studentmenu(){
+    int choice;
+    printf("1. Add Students");
+    printf("2. Delete Students");
+    printf("3. Edit Student Information");
+    printf("4. Veiw Student Record");
+    printf("5. Back");
+    printf("Ente your choice: ");
+    switch (choice)
+    {
+    case 1:
+        add_student();
+        break;
+    
+    case 2:
+        delete_student();
+        break;
+
+    case 3:
+        Update_student();
+        break;
+
+    case 4:
+        show_student_data();
+        break;
+
+    case 5: 
+        break;
+    default:
+        break;
+    }
+}
+
+void Courses_Menu(){
+    int choice;
+    printf("1. Add Courses");
+    printf("2. Delete Courses");
+    printf("3. Edit COurse ID");
+    printf("4. View Courses");
+    printf("5. Back");
+    printf("Enter your choice: ");
+    scanf("%d", &choice);
+    switch (choice)
+    {
+    case 1:
+        add_course();
+        break;
+    case 2:
+        delete_course();
+        break;
+
+    case 3:
+        update_courses();
+        break;
+    
+    case 4:
+        view_courses();
+        break;
+    
+    case 5:
+        break;
+    default:
+        break;
+    }
+}
+
+void Assignment_Menu(){
+
+    int choice;
+    printf("1. Add Assignment");
+    printf("2. Delete Assignment");
+    printf("3. View Assignment");
+    printf("4. View Submissions");
+    printf("5. Back");
+    printf("Enter your choice: ");
+    scanf("%d", &choice);
+    switch (choice)
+    {
+    case 1:
+        add_assignment();
+        break;
+    case 2:
+        remove_Assignment();
+        break;
+
+    case 3:
+        view_assignment();
+        break;
+    
+    case 4:
+        view_submissions();
+        break;
+    
+    case 5:
+        break;
+    default:
+        break;
+    }
+}
+
+void Manage_Grades(){
+
+    int choice;
+    printf("1. Add Student Grade");
+    printf("2. Delete Student Grade");
+    printf("3. View Grades");
+    printf("4. Back");
+    printf("Enter your choice: ");
+    scanf("%d", &choice);
+    switch (choice)
+    {
+    case 1:
+        Add_grades();
+        break;
+    case 2:
+        Delete_grade();
+        break;
+
+    case 3:
+        view_grades();
+        break;
+    
+    case 4:
+        break;
+
+    default:
+        break;
+    }
+}
+
+void Manage_Enrollments(){
+
+    int choice;
+    printf("1. Add Student Enrollement");
+    printf("2. Remove Enrollement");
+    printf("3. View Enrollement");
+    printf("4. Back");
+    printf("Enter your choice: ");
+    scanf("%d", &choice);
+    switch (choice)
+    {
+    case 1:
+        new_enrollments();
+        break;
+    case 2:
+        remove_enrollments();
+        break;
+
+    case 3:
+        view_enrollments();
+        break;
+    
+    case 4:
+        break;
+
     default:
         break;
     }
