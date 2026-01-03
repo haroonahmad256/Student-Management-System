@@ -17,7 +17,26 @@ struct admins
     char admin_password[50];
 };
 
+struct courses
+{
+    char course_id[20];
+    char course_name[50];
+    int creadit_hours;
+};
 
+struct enrollments
+{
+    char student_ID[10];
+    char course_ID[10];
+};
+
+struct assignments
+{
+    char Course_id[10];
+    char Assignment_id[10];
+    char Assignment_name[50];
+    char deadline[20];
+};
 
 
 
@@ -542,5 +561,204 @@ void Update_student()
     default:
         break;
     }
+}
+
+
+
+
+void add_course()
+{
+    FILE *fptr;
+    fptr = fopen("courses.txt", "a");
+    struct courses course;
+    printf("Enter New course ID: ");
+    scanf("%s", course.course_id);
+    printf("Enter Course Name: ");
+    scanf("%s", course.course_name);
+    printf("Enter Course Credit Hours: ");
+    scanf("%d", &course.creadit_hours);
+
+    fprintf(fptr, "%s %s %d\n", course.course_id, course.course_name, course.creadit_hours);
+
+}
+
+void delete_course()
+{
+    FILE *fptr;
+    FILE *fptr2;
+    fptr = fopen("courses.txt", "r");
+    fptr2 = fopen("courses_temp.txt", "a");
+    char del_course[10];
+    char enter_course_ID[10];
+    printf("Do you want to delete a Course(y/n): ");
+    scanf("%s", del_course);
+    int inside = 0;
+
+    if (del_course[0] == 'y' || del_course[0] == 'Y')
+    {
+        printf("Enter Course ID: ");
+        scanf("%s", enter_course_ID);
+
+        struct courses course;
+        while (fscanf(fptr, "%s %s %d", course.course_id, course.course_name, &course.creadit_hours) == 3)
+        {
+            if (strcmp(enter_course_ID, course.course_id) == 0)
+            {
+                inside = 1;
+                continue;
+            }
+            else
+            {
+
+                fprintf(fptr2, "%s %s %d", course.course_id, course.course_name, course.creadit_hours);
+            }
+        }
+
+        fclose(fptr2);
+        fclose(fptr);
+
+        if (inside)
+        {
+            remove("courses.txt");
+            rename("courses_temp.txt", "courses.txt");
+            printf("Course has been deleted successfully\n");
+        }
+        else
+        {
+            remove("courses_temp.txt");
+            printf("Course couldn't be deleted\n");
+        }
+    }
+
+}
+
+void view_courses()
+{
+    FILE *fptr;
+    fptr = fopen("courses.txt", "r");
+    char enter_courseid[10];
+    struct courses course;
+    int choice;
+    printf("Perform any action\n");
+    printf("1. Show data of a particular Course\n");
+    printf("2. SHow all Course\n");
+    printf("3. Exit\n");
+    printf("What do you want: ");
+    scanf("%d", &choice);
+
+    int inside = 0;
+    switch (choice)
+    {
+    case 1:
+
+
+        printf("Enter Course ID: ");
+        scanf("%s", enter_courseid);
+
+        while (fscanf(fptr, "%s %s %d", course.course_id, course.course_name, &course.creadit_hours) == 3)
+        {
+            if (strcmp(enter_courseid, course.course_id) == 0)
+            {
+                printf("Course ID: %s\n", course.course_id);
+                printf("Course Name: %s %s\n", course.course_name);
+                printf("Credit Hourse: %d\n", course.creadit_hours);
+                inside = 1;
+            }
+        }
+
+        if (inside)
+        {
+            printf("Rewiew data\n");
+        }
+        else
+        {
+            printf("Couldn't perform the operation!\n");
+        }
+
+        fclose(fptr);
+        break;
+
+    case 2:
+        int i = 0;
+
+        while (fscanf(fptr, "%s %s %d", course.course_id, course.course_name, &course.creadit_hours) == 3)
+        {
+            printf("Course no: %d\n", i+1);
+            printf("Course ID: %s\n", course.course_id);
+            printf("Course Name: %s\n", course.course_name);
+            printf("Credit Hourse: %d\n", course.creadit_hours);
+            printf("-----------------------\n");
+            inside = 1;
+            i++;
+        }
+
+        if (inside)
+        {
+            printf("Rewiew data\n");
+        }
+        else
+        {
+            printf("Couldn't perform the operation!\n");
+        }
+
+        fclose(fptr);
+
+        break;
+
+    case 3:
+        break;
+    default:
+        break;
+    }
+
+}
+
+void update_courses()
+{
+    FILE *fptr;
+    FILE *fptr2;
+    fptr = fopen("courses.txt", "r");
+    fptr2 = fopen("courses_temp.txt", "a");
+
+    char course_id[10], new_ID[20];
+    struct courses course;
+
+    printf("Enter Student ID to change ID: ");
+    scanf("%s", course_id);
+
+    int inside= 0;
+    while (fscanf(fptr, "%s %s %d", course.course_id, course.course_name, &course.creadit_hours) == 3)
+    {
+        if (strcmp(course_id, course.course_id) == 0)
+        {
+            printf("Enter new ID: ");
+            scanf("%s", new_ID);
+            fprintf(fptr2,  "%s %s %s %s\n", new_ID, course.course_name, course.creadit_hours);
+            inside = 1;
+        }
+
+        else
+        {
+
+            fprintf(fptr2,  "%s %s %s %s\n", course.course_id, course.course_name, course.creadit_hours);
+        }
+    }
+
+    fclose(fptr2);
+    fclose(fptr);
+
+    if (inside)
+    {
+        remove("courses.txt");
+        rename("courses_temp.txt", "courses.txt");
+        printf("Your Course ID has been changed successfully");
+    }
+
+    else
+    {
+        remove("courses_temp.txt");
+        printf("Course ID could not changed");
+    }
+
 }
 
