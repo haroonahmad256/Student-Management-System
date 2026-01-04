@@ -3,6 +3,7 @@
 #include <conio.h>
 #include <ctype.h>
 #include <stdlib.h>
+
 struct students
 {
     char student_id[20];
@@ -120,6 +121,15 @@ int Login_admin()
         FILE *fptr2;
         fptr3 = fopen("admin_login.txt", "r");
         fptr2 = fopen("admin_login_temp.txt", "w");
+        if (fptr == NULL || fptr2 == NULL)
+        {
+            printf("Error opening files!\n");
+            if (fptr3)
+                fclose(fptr3);
+            if (fptr2)
+                fclose(fptr2);
+            return 0;
+        }
         char forgotpassword[10];
         char admin_id[10], new_password[20];
         struct admins admin;
@@ -152,7 +162,6 @@ int Login_admin()
             }
             fclose(fptr3);
             fclose(fptr2);
-            fclose(fptr);
 
             if (inside)
             {
@@ -181,6 +190,11 @@ void add_student()
 
     FILE *fptr;
     fptr = fopen("students.txt", "a");
+    if (fptr == NULL)
+    {
+        printf("Error opening files!\n");
+        return;
+    }
     struct students student;
     printf("Enter Student Student ID: ");
     scanf("%s", student.student_id);
@@ -192,6 +206,7 @@ void add_student()
     scanf("%s", student.department);
     fprintf(fptr, "%s %s %s %s\n", student.student_id, student.student_name, student.password, student.department);
     printf("Student Data added successfully\n");
+    fclose(fptr);
     printf("Enter any key to continue..........\n");
     getchar();
 }
@@ -202,11 +217,14 @@ void delete_student()
     FILE *fptr;
     FILE *fptr2;
     fptr = fopen("students.txt", "r");
-    fptr2 = fopen("students_temp.txt", "a");
+    fptr2 = fopen("students_temp.txt", "w");
 
-    if (fptr2 == NULL)
+    if (fptr == NULL || fptr2 == NULL)
     {
-        printf("Error opening file");
+        printf("Error opening files!\n");
+        if (fptr) fclose(fptr);
+        if (fptr2) fclose(fptr2);
+        return;
     }
 
     char del_account[10];
@@ -236,8 +254,8 @@ void delete_student()
             }
         }
 
-        fclose(fptr2);
         fclose(fptr);
+        fclose(fptr2);
 
         if (inside)
         {
@@ -261,6 +279,12 @@ void show_student_data()
 {
     FILE *fptr;
     fptr = fopen("students.txt", "r");
+    if (fptr == NULL)
+    {
+        printf("Error opening files!\n");
+        if (fptr) fclose(fptr);
+        return;
+    }
     char enter_studentid[10];
     struct students student;
     int choice;
@@ -284,7 +308,7 @@ void show_student_data()
             if (strcmp(enter_studentid, student.student_id) == 0)
             {
                 printf("Student ID: %s\n", student.student_id);
-                printf("Student Name: %s %s\n", student.student_name);
+                printf("Student Name: %s\n", student.student_name);
                 printf("Department: %s\n", student.department);
                 printf("Password: %s\n", student.password);
                 inside = 1;
@@ -314,7 +338,7 @@ void show_student_data()
         {
             printf("Student%d data: \n", i + 1);
             printf("Student ID: %s\n", student.student_id);
-            printf("Student Name: %s %s\n", student.student_name);
+            printf("Student Name: %s\n", student.student_name);
             printf("Department: %s\n", student.department);
             printf("Password: %s\n", student.password);
             printf("\n");
@@ -336,7 +360,6 @@ void show_student_data()
         }
 
         fclose(fptr);
-
         break;
 
     case 3:
@@ -351,7 +374,14 @@ void change_name()
     FILE *fptr;
     FILE *fptr2;
     fptr = fopen("students.txt", "r");
-    fptr2 = fopen("students_temp.txt", "a");
+    fptr2 = fopen("students_temp.txt", "w");
+    if (fptr == NULL || fptr2 == NULL)
+    {
+        printf("Error opening files!\n");
+        if (fptr) fclose(fptr);
+        if (fptr2) fclose(fptr2);
+        return;
+    }
     char forgotpassword;
     char student_id[10], new_name[50];
     struct students student;
@@ -404,9 +434,16 @@ void change_student_ID()
     FILE *fptr;
     FILE *fptr2;
     fptr = fopen("students.txt", "r");
-    fptr2 = fopen("students_temp.txt", "a");
+    fptr2 = fopen("students_temp.txt", "w");
+    if (fptr == NULL || fptr2 == NULL)
+    {
+        printf("Error opening files!\n");
+        if (fptr) fclose(fptr);
+        if (fptr2) fclose(fptr2);
+        return;
+    }
     char forgotpassword;
-    char student_id[10], new_ID[20];
+    char student_id[20], new_ID[20];
     struct students student;
 
     printf("Enter Student ID to change ID: ");
@@ -457,7 +494,14 @@ void change_student_password()
     FILE *fptr;
     FILE *fptr2;
     fptr = fopen("students.txt", "r");
-    fptr2 = fopen("students_temp.txt", "a");
+    fptr2 = fopen("students_temp.txt", "w");
+    if (fptr == NULL || fptr2 == NULL)
+    {
+        printf("Error opening files!\n");
+        if (fptr) fclose(fptr);
+        if (fptr2) fclose(fptr2);
+        return;
+    }
     char forgotpassword;
     char student_id[10], new_Password[20];
     struct students student;
@@ -470,7 +514,7 @@ void change_student_password()
     {
         if (strcmp(student_id, student.student_id) == 0)
         {
-            printf("Enter new ID: ");
+            printf("Enter new Password: ");
             scanf("%s", new_Password);
             fprintf(fptr2, "%s %s %s %s\n", student.student_id, student.student_name, new_Password, student.department);
             inside = 1;
@@ -510,7 +554,14 @@ void change_student_Department()
     FILE *fptr;
     FILE *fptr2;
     fptr = fopen("students.txt", "r");
-    fptr2 = fopen("students_temp.txt", "a");
+    fptr2 = fopen("students_temp.txt", "w");
+    if (fptr == NULL || fptr2 == NULL)
+    {
+        printf("Error opening files!\n");
+        if (fptr) fclose(fptr);
+        if (fptr2) fclose(fptr2);
+        return;
+    }
     char forgotpassword;
     char student_id[10], new_Department[20];
     struct students student;
@@ -523,7 +574,7 @@ void change_student_Department()
     {
         if (strcmp(student_id, student.student_id) == 0)
         {
-            printf("Enter new ID: ");
+            printf("Enter new Department: ");
             scanf("%s", new_Department);
             fprintf(fptr2, "%s %s %s %s\n", student.student_id, student.student_name, student.password, new_Department);
             inside = 1;
@@ -598,6 +649,12 @@ void add_course()
 {
     FILE *fptr;
     fptr = fopen("courses.txt", "a");
+    if (fptr == NULL)
+    {
+        printf("Error opening files!\n");
+        if (fptr) fclose(fptr);
+        return;
+    }
     struct courses course;
     printf("Enter New course ID: ");
     scanf("%s", course.course_id);
@@ -605,8 +662,9 @@ void add_course()
     scanf("%s", course.course_name);
     printf("Enter Course Credit Hours: ");
     scanf("%d", &course.creadit_hours);
-
     fprintf(fptr, "%s %s %d\n", course.course_id, course.course_name, course.creadit_hours);
+    fclose(fptr);
+    printf("Course has been added Successsfully");
 }
 
 void delete_course()
@@ -614,7 +672,14 @@ void delete_course()
     FILE *fptr;
     FILE *fptr2;
     fptr = fopen("courses.txt", "r");
-    fptr2 = fopen("courses_temp.txt", "a");
+    fptr2 = fopen("courses_temp.txt", "w");
+    if (fptr == NULL || fptr2 == NULL)
+    {
+        printf("Error opening files!\n");
+        if (fptr) fclose(fptr);
+        if (fptr2) fclose(fptr2);
+        return;
+    }
     char del_course[10];
     char enter_course_ID[10];
     printf("Do you want to delete a Course(y/n): ");
@@ -637,7 +702,7 @@ void delete_course()
             else
             {
 
-                fprintf(fptr2, "%s %s %d", course.course_id, course.course_name, course.creadit_hours);
+                fprintf(fptr2, "%s %s %d\n", course.course_id, course.course_name, course.creadit_hours);
             }
         }
 
@@ -662,6 +727,12 @@ void view_courses()
 {
     FILE *fptr;
     fptr = fopen("courses.txt", "r");
+    if (fptr == NULL)
+    {
+        printf("Error opening file!\n");
+        if (fptr) fclose(fptr);
+        return;
+    }
     char enter_courseid[10];
     struct courses course;
     int choice;
@@ -690,6 +761,7 @@ void view_courses()
                 inside = 1;
             }
         }
+        fclose(fptr);
 
         if (inside)
         {
@@ -700,7 +772,6 @@ void view_courses()
             printf("Couldn't perform the operation!\n");
         }
 
-        fclose(fptr);
         break;
 
     case 2:
@@ -716,6 +787,7 @@ void view_courses()
             inside = 1;
             i++;
         }
+        fclose(fptr);
 
         if (inside)
         {
@@ -726,7 +798,6 @@ void view_courses()
             printf("Couldn't perform the operation!\n");
         }
 
-        fclose(fptr);
 
         break;
 
@@ -742,8 +813,14 @@ void update_courses()
     FILE *fptr;
     FILE *fptr2;
     fptr = fopen("courses.txt", "r");
-    fptr2 = fopen("courses_temp.txt", "a");
-
+    fptr2 = fopen("courses_temp.txt", "w");
+    if (fptr == NULL || fptr2 == NULL)
+    {
+        printf("Error opening files!\n");
+        if (fptr) fclose(fptr);
+        if (fptr2) fclose(fptr2);
+        return;
+    }
     char course_id[20], new_ID[20];
     struct courses course;
 
@@ -757,7 +834,7 @@ void update_courses()
         {
             printf("Enter new ID: ");
             scanf("%s", new_ID);
-            fprintf(fptr2, "%s %s %d\n", new_ID, course.course_name, &course.creadit_hours);
+            fprintf(fptr2, "%s %s %d\n", new_ID, course.course_name, course.creadit_hours);
             inside = 1;
         }
 
@@ -790,12 +867,19 @@ void new_enrollments()
 
     FILE *fptr;
     fptr = fopen("enrollments.txt", "a");
+    if (fptr == NULL)
+    {
+        printf("Error opening files!\n");
+        if (fptr) fclose(fptr);
+        return;
+    }
     struct enrollments enroll;
     printf("Enter Student ID: ");
     scanf("%s", enroll.student_ID);
     printf("Enter Course ID: ");
     scanf("%s", enroll.course_ID);
-    fprintf(fptr, "%s %s\n", enroll.student_ID, enroll.student_ID);
+    fprintf(fptr, "%s %s\n", enroll.student_ID, enroll.course_ID);
+    fclose(fptr);
     printf("New Enrollment Added Successfully\n");
 }
 
@@ -804,6 +888,12 @@ void view_enrollments()
 
     FILE *fptr;
     fptr = fopen("enrollments.txt", "r");
+    if (fptr == NULL)
+    {
+        printf("Error opening files!\n");
+        if (fptr) fclose(fptr);
+        return;
+    }
     char enter_courseid[10];
     struct enrollments enroll;
     int choice;
@@ -823,7 +913,7 @@ void view_enrollments()
         printf("Enter Course ID: ");
         scanf("%s", enter_courseid);
 
-        while (fscanf(fptr, "%s %s", enroll.student_ID, enroll.student_ID) == 2)
+        while (fscanf(fptr, "%s %s", enroll.student_ID, enroll.course_ID) == 2)
         {
             if (strcmp(enter_courseid, enroll.course_ID) == 0)
             {
@@ -834,6 +924,7 @@ void view_enrollments()
                 j++;
             }
         }
+        fclose(fptr);
 
         if (inside)
         {
@@ -844,13 +935,12 @@ void view_enrollments()
             printf("Couldn't perform the operation!\n");
         }
 
-        fclose(fptr);
         break;
 
     case 2:
         int i = 0;
 
-        while (fscanf(fptr, "%s %s", enroll.student_ID, enroll.student_ID) == 2)
+        while (fscanf(fptr, "%s %s", enroll.course_ID, enroll.student_ID) == 2)
         {
             printf("Course no: %d\n", i + 1);
             printf("Course ID: %s | Course Name: %s", enroll.course_ID, enroll.student_ID);
@@ -858,6 +948,7 @@ void view_enrollments()
             inside = 1;
             i++;
         }
+        fclose(fptr);
 
         if (inside)
         {
@@ -868,7 +959,6 @@ void view_enrollments()
             printf("Couldn't perform the operation!\n");
         }
 
-        fclose(fptr);
 
         break;
 
@@ -885,8 +975,14 @@ void remove_enrollments()
     FILE *fptr;
     FILE *fptr2;
     fptr = fopen("enrollments.txt", "r");
-    fptr2 = fopen("enrollments_temp.txt", "a");
-
+    fptr2 = fopen("enrollments_temp.txt", "w");
+    if (fptr == NULL || fptr2 == NULL)
+    {
+        printf("Error opening files!\n");
+        if (fptr) fclose(fptr);
+        if (fptr2) fclose(fptr2);
+        return;
+    }
     char del_enrollement[10];
     char enter_student_ID[10];
     printf("Do you want to delete an enrollment(y/n): ");
@@ -899,7 +995,7 @@ void remove_enrollments()
         scanf("%s", enter_student_ID);
 
         struct enrollments enroll;
-        while (fscanf(fptr, "%s %s", enroll.student_ID, enroll.student_ID) == 3)
+        while (fscanf(fptr, "%s %s", enroll.course_ID, enroll.student_ID) == 2)
         {
             if (strcmp(enter_student_ID, enroll.student_ID) == 0)
             {
@@ -1001,7 +1097,7 @@ void add_assignment()
     }
     else
     {
-        printf("Error: Course ID doesn't exist.\n");
+        printf("Course ID doesn't exist.\n");
     }
 
     fclose(fptr);
@@ -1012,7 +1108,14 @@ void remove_Assignment()
     FILE *fptr;
     FILE *fptr2;
     fptr = fopen("assignments.txt", "r");
-    fptr2 = fopen("assignments_temp.txt", "a");
+    fptr2 = fopen("assignments_temp.txt", "w");
+    if (fptr == NULL || fptr2 == NULL)
+    {
+        printf("Error opening files!\n");
+        if (fptr) fclose(fptr);
+        if (fptr2) fclose(fptr2);
+        return;
+    }
     char del_assignment[10];
     char Assignment_ID[10];
     printf("Do you want to remove an assignment(y/n): ");
@@ -1059,6 +1162,12 @@ void view_assignment()
 {
     FILE *fptr;
     fptr = fopen("assignments.txt", "r");
+    if (fptr == NULL )
+    {
+        printf("Error opening files!\n");
+        if (fptr) fclose(fptr);
+        return;
+    }
 
     char enter_assignmentid[10];
     struct assignments assignment;
@@ -1084,6 +1193,12 @@ void view_submissions()
 
     FILE *fptr;
     fptr = fopen("submissions.txt", "r");
+    if (fptr == NULL)
+    {
+        printf("Error opening files!\n");
+        if (fptr) fclose(fptr);
+        return;
+    }
     char enter_assignmentid[10];
     struct submission submit;
 
@@ -1126,6 +1241,12 @@ void Add_grades()
 {
     FILE *fptr;
     fptr = fopen("grades.txt", "a");
+    if (fptr == NULL )
+    {
+        printf("Error opening files!\n");
+        if (fptr) fclose(fptr);
+        return;
+    }
     struct grades g;
     printf("Enter Student ID: ");
     scanf("%s", g.student_id);
@@ -1199,7 +1320,14 @@ void Delete_grade()
     FILE *fptr;
     FILE *fptr2;
     fptr = fopen("grades.txt", "r");
-    fptr2 = fopen("grades_temp.txt", "a");
+    fptr2 = fopen("grades_temp.txt", "w");
+    if (fptr == NULL || fptr2 == NULL)
+    {
+        printf("Error opening files!\n");
+        if (fptr) fclose(fptr);
+        if (fptr2) fclose(fptr2);
+        return;
+    }
     char del_grades[10];
     char Student_ID[10];
     printf("Do you want to remove grades of a student(y/n): ");
@@ -1247,7 +1375,12 @@ void view_grades()
 {
     FILE *fptr;
     fptr = fopen("grades.txt", "r");
-
+    if (fptr == NULL)
+    {
+        printf("Error opening files!\n");
+        if (fptr) fclose(fptr);
+        return;
+    }
     char enter_studentid[10];
     struct grades g;
     int choice;
@@ -1276,6 +1409,7 @@ void view_grades()
                 inside = 1;
             }
         }
+        fclose(fptr);
 
         if (inside)
         {
@@ -1286,7 +1420,6 @@ void view_grades()
             printf("Couldn't perform the operation!\n");
         }
 
-        fclose(fptr);
         break;
 
     case 2:
@@ -1302,6 +1435,7 @@ void view_grades()
             inside = 1;
             i++;
         }
+        fclose(fptr);
 
         if (inside)
         {
@@ -1312,7 +1446,6 @@ void view_grades()
             printf("Couldn't perform the operation!\n");
         }
 
-        fclose(fptr);
         break;
 
     case 3:
@@ -1337,7 +1470,7 @@ void adminmainMenu()
 
 void ManageSudents()
 {
-    system("cls");
+    // system("cls");
     int choice;
     printf("Student Managing Section\n");
     printf("1. Add Students\n");
@@ -1358,7 +1491,7 @@ void ManageSudents()
         break;
 
     case 3:
-        system("cls");
+        // system("cls");
         Update_student();
         break;
 
@@ -1375,7 +1508,7 @@ void ManageSudents()
 
 void Courses_Menu()
 {
-    system("cls");
+    // system("cls");
     int choice;
     printf("COuse Management Section\n");
     printf("1. Add Courses\n");
@@ -1419,7 +1552,7 @@ void Courses_Menu()
 
 void Assignment_Menu()
 {
-    system("cls");
+    // system("cls");
     int choice;
     printf("Assignment Management Section\n");
     printf("1. Add Assignment\n");
@@ -1463,7 +1596,7 @@ void Assignment_Menu()
 
 void Manage_Grades()
 {
-    system("cls");
+    // system("cls");
     int choice;
     printf("Grades Management Section\n");
     printf("1. Add Student Grade\n");
@@ -1503,7 +1636,7 @@ void Manage_Grades()
 
 void Manage_Enrollments()
 {
-    system("cls");
+    // system("cls");
     int choice;
     printf("Student Enrollment Section\n");
     printf("1. Add Student Enrollement\n");
@@ -1538,4 +1671,3 @@ void Manage_Enrollments()
         break;
     }
 }
-

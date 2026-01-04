@@ -8,7 +8,11 @@
 
 int main()
 {
+    int j=1;
+    do
+    {
     int choice;
+    printf("Student Management System");
     printf("1. Login as Student\n");
     printf("2. Login as Admin\n");
     printf("3. Exit\n");
@@ -50,6 +54,7 @@ int main()
                     Manage_Enrollments();
                     break;
                 case 6:
+                    i=0;
                     break;
                 default:
                     break;
@@ -60,12 +65,12 @@ int main()
 
         break;
     }
-
     case 3:
+        j=0;
         break;
     default:
         break;
     }
-
+    } while (j);
     return 0;
 }
