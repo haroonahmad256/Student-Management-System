@@ -12,7 +12,8 @@ int main()
     do
     {
     int choice;
-    printf("Student Management System");
+    printf("Student Management System\n");
+    printf("-------------------------\n");
     printf("1. Login as Student\n");
     printf("2. Login as Admin\n");
     printf("3. Exit\n");
@@ -22,7 +23,40 @@ int main()
     switch (choice)
     {
     case 1:
+    {
+        int choice3;
+        printf("1. Login as Student\n");
+        printf("2. Register as Student\n");
+        printf("3. Exit\n");
+        printf("Enter your choice: ");
+        scanf("%d", &choice3);
+        switch (choice3)
+        {
+        case 1:
+            system("cls");
+            int authenticate= loginasastudent();
+            if (authenticate)
+            {
+                menu_student();
+            }
+            break;
+        case 2:
+            system("cls");
+            registerstudent();
+            printf("You have been registered as Student\n");
+            printf("Login to proceed\n");
+            printf("\nEnter any key to continue..........");
+            getch();
+            break;
+        case 3: 
+            j=0;
+            break;
+        default:
+            break;
+        }
+        
         break;
+    }
 
     case 2:
     {

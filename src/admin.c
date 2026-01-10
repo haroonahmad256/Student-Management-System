@@ -55,7 +55,7 @@ struct grades
 
 int Login_admin()
 {
-
+    system("cls");
     int choice;
     printf("1. Login as Admin\n");
     printf("2. Reset Password\n");
@@ -208,7 +208,7 @@ void add_student()
     printf("Student Data added successfully\n");
     fclose(fptr);
     printf("Enter any key to continue..........\n");
-    getchar();
+    getch();
 }
 
 void delete_student()
@@ -222,8 +222,10 @@ void delete_student()
     if (fptr == NULL || fptr2 == NULL)
     {
         printf("Error opening files!\n");
-        if (fptr) fclose(fptr);
-        if (fptr2) fclose(fptr2);
+        if (fptr)
+            fclose(fptr);
+        if (fptr2)
+            fclose(fptr2);
         return;
     }
 
@@ -263,14 +265,14 @@ void delete_student()
             rename("students_temp.txt", "students.txt");
             printf("You account has been deleted successfully\n");
             printf("Enter any key to continue..........\n");
-            getchar();
+            getch();
         }
         else
         {
             remove("students_temp.txt");
             printf("Account couldn't be deleted\n");
             printf("Enter any key to continue..........");
-            getchar();
+            getch();
         }
     }
 }
@@ -282,7 +284,8 @@ void show_student_data()
     if (fptr == NULL)
     {
         printf("Error opening files!\n");
-        if (fptr) fclose(fptr);
+        if (fptr)
+            fclose(fptr);
         return;
     }
     char enter_studentid[10];
@@ -319,13 +322,13 @@ void show_student_data()
         {
             printf("Rewiew data\n");
             printf("Enter any key to continue..........\n");
-            getchar();
+            getch();
         }
         else
         {
             printf("Couldn't perform the operation!\n");
             printf("Enter any key to continue..........\n");
-            getchar();
+            getch();
         }
 
         fclose(fptr);
@@ -350,13 +353,13 @@ void show_student_data()
         {
             printf("Rewiew data\n");
             printf("Enter any key to continue..........\n");
-            getchar();
+            getch();
         }
         else
         {
             printf("Couldn't perform the operation!\n");
             printf("Enter any key to continue..........\n");
-            getchar();
+            getch();
         }
 
         fclose(fptr);
@@ -378,8 +381,10 @@ void change_name()
     if (fptr == NULL || fptr2 == NULL)
     {
         printf("Error opening files!\n");
-        if (fptr) fclose(fptr);
-        if (fptr2) fclose(fptr2);
+        if (fptr)
+            fclose(fptr);
+        if (fptr2)
+            fclose(fptr2);
         return;
     }
     char forgotpassword;
@@ -416,7 +421,7 @@ void change_name()
         rename("students_temp.txt", "students.txt");
         printf("Your Student Name has been changed successfully\n");
         printf("Enter any key to continue..........\n");
-        getchar();
+        getch();
     }
 
     else
@@ -424,7 +429,7 @@ void change_name()
         remove("students_temp.txt");
         printf("Student Name could not changed\n");
         printf("Enter any key to continue..........\n");
-        getchar();
+        getch();
     }
 }
 
@@ -438,8 +443,10 @@ void change_student_ID()
     if (fptr == NULL || fptr2 == NULL)
     {
         printf("Error opening files!\n");
-        if (fptr) fclose(fptr);
-        if (fptr2) fclose(fptr2);
+        if (fptr)
+            fclose(fptr);
+        if (fptr2)
+            fclose(fptr2);
         return;
     }
     char forgotpassword;
@@ -476,7 +483,7 @@ void change_student_ID()
         rename("students_temp.txt", "students.txt");
         printf("Your Student ID has been changed successfully\n");
         printf("Enter any key to continue..........\n");
-        getchar();
+        getch();
     }
 
     else
@@ -484,7 +491,7 @@ void change_student_ID()
         remove("students_temp.txt");
         printf("Student ID could not changed\n");
         printf("Enter any key to continue..........\n");
-        getchar();
+        getch();
     }
 }
 
@@ -498,8 +505,10 @@ void change_student_password()
     if (fptr == NULL || fptr2 == NULL)
     {
         printf("Error opening files!\n");
-        if (fptr) fclose(fptr);
-        if (fptr2) fclose(fptr2);
+        if (fptr)
+            fclose(fptr);
+        if (fptr2)
+            fclose(fptr2);
         return;
     }
     char forgotpassword;
@@ -536,7 +545,7 @@ void change_student_password()
         rename("students_temp.txt", "students.txt");
         printf("Your Student Account Password has been changed successfully\n");
         printf("Enter any key to continue..........\n");
-        getchar();
+        getch();
     }
 
     else
@@ -544,7 +553,7 @@ void change_student_password()
         remove("students_temp.txt");
         printf("Student Account Password could not changed\n");
         printf("Enter any key to continue..........\n");
-        getchar();
+        getch();
     }
 }
 
@@ -558,8 +567,10 @@ void change_student_Department()
     if (fptr == NULL || fptr2 == NULL)
     {
         printf("Error opening files!\n");
-        if (fptr) fclose(fptr);
-        if (fptr2) fclose(fptr2);
+        if (fptr)
+            fclose(fptr);
+        if (fptr2)
+            fclose(fptr2);
         return;
     }
     char forgotpassword;
@@ -596,7 +607,7 @@ void change_student_Department()
         rename("students_temp.txt", "students.txt");
         printf("Your Student Department has been changed successfully\n");
         printf("Enter any key to continue..........");
-        getchar();
+        getch();
     }
 
     else
@@ -604,7 +615,7 @@ void change_student_Department()
         remove("students_temp.txt");
         printf("Student Department could not changed\n");
         printf("Enter any key to continue..........\n");
-        getchar();
+        getch();
     }
 }
 
@@ -652,7 +663,8 @@ void add_course()
     if (fptr == NULL)
     {
         printf("Error opening files!\n");
-        if (fptr) fclose(fptr);
+        if (fptr)
+            fclose(fptr);
         return;
     }
     struct courses course;
@@ -676,8 +688,10 @@ void delete_course()
     if (fptr == NULL || fptr2 == NULL)
     {
         printf("Error opening files!\n");
-        if (fptr) fclose(fptr);
-        if (fptr2) fclose(fptr2);
+        if (fptr)
+            fclose(fptr);
+        if (fptr2)
+            fclose(fptr2);
         return;
     }
     char del_course[10];
@@ -730,7 +744,8 @@ void view_courses()
     if (fptr == NULL)
     {
         printf("Error opening file!\n");
-        if (fptr) fclose(fptr);
+        if (fptr)
+            fclose(fptr);
         return;
     }
     char enter_courseid[10];
@@ -798,7 +813,6 @@ void view_courses()
             printf("Couldn't perform the operation!\n");
         }
 
-
         break;
 
     case 3:
@@ -817,8 +831,10 @@ void update_courses()
     if (fptr == NULL || fptr2 == NULL)
     {
         printf("Error opening files!\n");
-        if (fptr) fclose(fptr);
-        if (fptr2) fclose(fptr2);
+        if (fptr)
+            fclose(fptr);
+        if (fptr2)
+            fclose(fptr2);
         return;
     }
     char course_id[20], new_ID[20];
@@ -870,7 +886,8 @@ void new_enrollments()
     if (fptr == NULL)
     {
         printf("Error opening files!\n");
-        if (fptr) fclose(fptr);
+        if (fptr)
+            fclose(fptr);
         return;
     }
     struct enrollments enroll;
@@ -891,7 +908,8 @@ void view_enrollments()
     if (fptr == NULL)
     {
         printf("Error opening files!\n");
-        if (fptr) fclose(fptr);
+        if (fptr)
+            fclose(fptr);
         return;
     }
     char enter_courseid[10];
@@ -959,7 +977,6 @@ void view_enrollments()
             printf("Couldn't perform the operation!\n");
         }
 
-
         break;
 
     case 3:
@@ -979,8 +996,10 @@ void remove_enrollments()
     if (fptr == NULL || fptr2 == NULL)
     {
         printf("Error opening files!\n");
-        if (fptr) fclose(fptr);
-        if (fptr2) fclose(fptr2);
+        if (fptr)
+            fclose(fptr);
+        if (fptr2)
+            fclose(fptr2);
         return;
     }
     char del_enrollement[10];
@@ -1112,8 +1131,10 @@ void remove_Assignment()
     if (fptr == NULL || fptr2 == NULL)
     {
         printf("Error opening files!\n");
-        if (fptr) fclose(fptr);
-        if (fptr2) fclose(fptr2);
+        if (fptr)
+            fclose(fptr);
+        if (fptr2)
+            fclose(fptr2);
         return;
     }
     char del_assignment[10];
@@ -1162,10 +1183,11 @@ void view_assignment()
 {
     FILE *fptr;
     fptr = fopen("assignments.txt", "r");
-    if (fptr == NULL )
+    if (fptr == NULL)
     {
         printf("Error opening files!\n");
-        if (fptr) fclose(fptr);
+        if (fptr)
+            fclose(fptr);
         return;
     }
 
@@ -1196,7 +1218,8 @@ void view_submissions()
     if (fptr == NULL)
     {
         printf("Error opening files!\n");
-        if (fptr) fclose(fptr);
+        if (fptr)
+            fclose(fptr);
         return;
     }
     char enter_assignmentid[10];
@@ -1241,10 +1264,11 @@ void Add_grades()
 {
     FILE *fptr;
     fptr = fopen("grades.txt", "a");
-    if (fptr == NULL )
+    if (fptr == NULL)
     {
         printf("Error opening files!\n");
-        if (fptr) fclose(fptr);
+        if (fptr)
+            fclose(fptr);
         return;
     }
     struct grades g;
@@ -1312,7 +1336,7 @@ void Add_grades()
     fclose(fptr);
     printf("Grades have been Added\n");
     printf("Press any key to continue......\n");
-    getchar();
+    getch();
 }
 
 void Delete_grade()
@@ -1324,8 +1348,10 @@ void Delete_grade()
     if (fptr == NULL || fptr2 == NULL)
     {
         printf("Error opening files!\n");
-        if (fptr) fclose(fptr);
-        if (fptr2) fclose(fptr2);
+        if (fptr)
+            fclose(fptr);
+        if (fptr2)
+            fclose(fptr2);
         return;
     }
     char del_grades[10];
@@ -1378,7 +1404,8 @@ void view_grades()
     if (fptr == NULL)
     {
         printf("Error opening files!\n");
-        if (fptr) fclose(fptr);
+        if (fptr)
+            fclose(fptr);
         return;
     }
     char enter_studentid[10];
@@ -1457,20 +1484,20 @@ void view_grades()
 
 void adminmainMenu()
 {
-
+    system("cls");
     printf("\n******Welcome As Admin******\n");
-    printf("Student Management System\n");
+    printf("Student Management System -- Admin\n");
     printf("1. Manage Students\n");
     printf("2. Manage Courses\n");
     printf("3. Manage Assignment\n");
     printf("4. Manage Grades\n");
     printf("5. Manage Enrollments\n");
-    printf("6 Logout\n");
+    printf("6. Logout\n");
 }
 
 void ManageSudents()
 {
-    // system("cls");
+    system("cls");
     int choice;
     printf("Student Managing Section\n");
     printf("1. Add Students\n");
@@ -1491,7 +1518,7 @@ void ManageSudents()
         break;
 
     case 3:
-        // system("cls");
+        system("cls");
         Update_student();
         break;
 
@@ -1508,166 +1535,179 @@ void ManageSudents()
 
 void Courses_Menu()
 {
-    // system("cls");
     int choice;
-    printf("COuse Management Section\n");
-    printf("1. Add Courses\n");
-    printf("2. Delete Courses\n");
-    printf("3. Edit COurse ID\n");
-    printf("4. View Courses\n");
-    printf("5. Back\n");
-    printf("Enter your choice: ");
-    scanf("%d", &choice);
-    switch (choice)
+    do
     {
-    case 1:
-        add_course();
-        printf("\nEnter any key to continue..........");
-        getchar();
-        break;
-    case 2:
-        delete_course();
-        printf("\nEnter any key to continue..........");
-        getchar();
-        break;
+        system("cls");
+        printf("COuse Management Section\n");
+        printf("1. Add Courses\n");
+        printf("2. Delete Courses\n");
+        printf("3. Edit COurse ID\n");
+        printf("4. View Courses\n");
+        printf("5. Back\n");
+        printf("Enter your choice: ");
+        scanf("%d", &choice);
+        switch (choice)
+        {
+        case 1:
+            add_course();
+            printf("Enter any key to continue..........");
+            getch();
+            break;
+        case 2:
+            delete_course();
+            printf("Enter any key to continue..........");
+            getch();
+            break;
 
-    case 3:
-        update_courses();
-        printf("\nEnter any key to continue..........");
-        getchar();
-        break;
+        case 3:
+            update_courses();
+            printf("Enter any key to continue..........");
+            getch();
+            break;
 
-    case 4:
-        view_courses();
-        printf("\nEnter any key to continue..........");
-        getchar();
-        break;
+        case 4:
+            view_courses();
+            printf("Enter any key to continue..........");
+            getch();
+            break;
 
-    case 5:
-        break;
-    default:
-        break;
-    }
+        case 5:
+            break;
+        default:
+            break;
+        }
+    } while (choice != 5);
 }
 
 void Assignment_Menu()
 {
-    // system("cls");
     int choice;
-    printf("Assignment Management Section\n");
-    printf("1. Add Assignment\n");
-    printf("2. Delete Assignment\n");
-    printf("3. View Assignment\n");
-    printf("4. View Submissions\n");
-    printf("5. Back\n");
-    printf("Enter your choice: ");
-    scanf("%d", &choice);
-    switch (choice)
+    do
     {
-    case 1:
-        add_assignment();
-        printf("\nEnter any key to continue..........");
-        getchar();
-        break;
-    case 2:
-        remove_Assignment();
-        printf("\nEnter any key to continue..........");
-        getchar();
-        break;
+        system("cls");
+        printf("Assignment Management Section\n");
+        printf("1. Add Assignment\n");
+        printf("2. Delete Assignment\n");
+        printf("3. View Assignment\n");
+        printf("4. View Submissions\n");
+        printf("5. Back\n");
+        printf("Enter your choice: ");
+        scanf("%d", &choice);
+        switch (choice)
+        {
+        case 1:
+            add_assignment();
+            printf("Enter any key to continue..........");
+            getch();
+            break;
+        case 2:
+            remove_Assignment();
+            printf("Enter any key to continue..........");
+            getch();
+            break;
 
-    case 3:
-        view_assignment();
-        printf("\nEnter any key to continue..........");
-        getchar();
-        break;
+        case 3:
+            view_assignment();
+            printf("Enter any key to continue..........");
+            getch();
+            break;
 
-    case 4:
-        view_submissions();
-        printf("\nEnter any key to continue..........");
-        getchar();
-        break;
+        case 4:
+            view_submissions();
+            printf("Enter any key to continue..........");
+            getch();
+            break;
 
-    case 5:
-        break;
-    default:
-        break;
-    }
+        case 5:
+            choice = 5;
+            break;
+        default:
+            break;
+        }
+    } while (choice != 5);
 }
 
 void Manage_Grades()
 {
-    // system("cls");
     int choice;
-    printf("Grades Management Section\n");
-    printf("1. Add Student Grade\n");
-    printf("2. Delete Student Grade\n");
-    printf("3. View Grades\n");
-    printf("4. Back\n");
-    printf("Enter your choice: ");
-    scanf("%d", &choice);
-    switch (choice)
+    do
     {
-    case 1:
-        Add_grades();
-        printf("\nEnter any key to continue..........");
-        getchar();
-        break;
-    case 2:
-        Delete_grade();
-        printf("\nEnter any key to continue..........");
-        getchar();
-        break;
+        system("cls");
+        printf("Grades Management Section\n");
+        printf("1. Add Student Grade\n");
+        printf("2. Delete Student Grade\n");
+        printf("3. View Grades\n");
+        printf("4. Back\n");
+        printf("Enter your choice: ");
+        scanf("%d", &choice);
+        switch (choice)
+        {
+        case 1:
+            Add_grades();
+            printf("Enter any key to continue..........");
+            getch();
+            break;
+        case 2:
+            Delete_grade();
+            printf("Enter any key to continue..........");
+            getch();
+            break;
 
-    case 3:
-        view_grades();
-        printf("\nEnter any key to continue..........");
-        getchar();
-        break;
+        case 3:
+            view_grades();
+            printf("Enter any key to continue..........");
+            getch();
+            break;
 
-    case 4:
-        printf("\nEnter any key to continue..........");
-        getchar();
-        break;
+        case 4:
+            printf("Enter any key to continue..........");
+            getch();
+            break;
 
-    default:
-        break;
-    }
+        default:
+            break;
+        }
+    } while (choice != 4);
 }
 
 void Manage_Enrollments()
 {
-    // system("cls");
     int choice;
-    printf("Student Enrollment Section\n");
-    printf("1. Add Student Enrollement\n");
-    printf("2. Remove Enrollement\n");
-    printf("3. View Enrollement\n");
-    printf("4. Back\n");
-    printf("Enter your choice: ");
-    scanf("%d", &choice);
-    switch (choice)
+    do
     {
-    case 1:
-        new_enrollments();
-        printf("\nEnter any key to continue..........");
-        getchar();
-        break;
-    case 2:
-        remove_enrollments();
-        printf("\nEnter any key to continue..........");
-        getchar();
-        break;
+        system("cls");
+        printf("Student Enrollment Section\n");
+        printf("1. Add Student Enrollement\n");
+        printf("2. Remove Enrollement\n");
+        printf("3. View Enrollement\n");
+        printf("4. Back\n");
+        printf("Enter your choice: ");
+        scanf("%d", &choice);
+        switch (choice)
+        {
+        case 1:
+            new_enrollments();
+            printf("Enter any key to continue..........");
+            getch();
+            break;
+        case 2:
+            remove_enrollments();
+            printf("Enter any key to continue..........");
+            getch();
+            break;
 
-    case 3:
-        view_enrollments();
-        printf("\nEnter any key to continue..........");
-        getchar();
-        break;
+        case 3:
+            view_enrollments();
+            printf("Enter any key to continue..........");
+            getch();
+            break;
 
-    case 4:
-        break;
+        case 4:
+            break;
 
-    default:
-        break;
-    }
+        default:
+            break;
+        }
+    } while (choice != 4);
 }
